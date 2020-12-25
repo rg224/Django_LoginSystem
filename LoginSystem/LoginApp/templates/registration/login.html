@@ -1,1 +1,23 @@
 {% extends "LoginApp/base.html" %}
+
+{% block title %}
+    Login
+{% endblock title %}
+
+{% block content %}
+    <div class="callout" style="margin: auto; margin-top: 2%; width: 50%;">
+        
+        {% if form.errors %}
+            <p>Your username or password didn't match! Please try again.</p>
+        {% endif %}
+
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+
+            <input type="submit" class="button" value="Login">
+            <input type="hidden" name="next" value="{{next}}">
+        </form>
+    </div>
+
+{% endblock content %}
